@@ -13,7 +13,6 @@ public class Query2 {
                 "Ss20112013Ss.");
         Statement st = con.createStatement();
 
-<<<<<<< HEAD
         //Soru-1:Ögrenciler table daki Erkek öğrencileri listeleyiniz
 
         ResultSet result1=st.executeQuery("Select * from ogrenciler Where cinsiyet='E'");
@@ -22,21 +21,10 @@ public class Query2 {
 
             System.out.println(result1.getInt(1) + "==>" + result1.getString(2) + "==>" +
                     result1.getString(3) + "==>" + result1.getString(4));
-        }
 
 
-
-
-
-
-
-
-
-
-
-=======
         ResultSet data = st.executeQuery("select * from ogrenciler where cinsiyet='E'");
->>>>>>> ercan
+
 
         //SORU: Öğrenciler tablosundaki Erkek möğrencileri listeleyiniz?
 
