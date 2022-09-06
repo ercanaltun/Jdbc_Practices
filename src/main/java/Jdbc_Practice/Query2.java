@@ -15,7 +15,7 @@ public class Query2 {
 
         //Soru-1:Ögrenciler table daki Erkek öğrencileri listeleyiniz
 
-        ResultSet result1=st.executeQuery("Select * from ogrenciler Where cinsiyet='E'");
+        ResultSet result1 = st.executeQuery("Select * from ogrenciler Where cinsiyet='E'");
 
         while (result1.next()) {
 
@@ -23,20 +23,21 @@ public class Query2 {
                     result1.getString(3) + "==>" + result1.getString(4));
 
 
-        ResultSet data = st.executeQuery("select * from ogrenciler where cinsiyet='E'");
+            ResultSet data = st.executeQuery("select * from ogrenciler where cinsiyet='E'");
 
 
-        //SORU: Öğrenciler tablosundaki Erkek möğrencileri listeleyiniz?
+            //SORU: Öğrenciler tablosundaki Erkek möğrencileri listeleyiniz?
 
-        while (data.next()){
-            //System.out.println(data.getInt(1) + data.getString(2) +
-            //        data.getInt(3) + data.getString(4));
+            while (data.next()) {
+                //System.out.println(data.getInt(1) + data.getString(2) +
+                //        data.getInt(3) + data.getString(4));
 
-            System.out.printf("%-6d %-15.15s %-8s %-8s\n", ((ResultSet) data).getInt(1), data.getString(2), data.getString(3), data.getString(4));
+                System.out.printf("%-6d %-15.15s %-8s %-8s\n", ((ResultSet) data).getInt(1), data.getString(2), data.getString(3), data.getString(4));
 
+            }
+            con.close();
+            st.close();
+            data.close();
         }
-        con.close();
-        st.close();
-        data.close();
     }
 }
