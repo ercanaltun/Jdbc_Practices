@@ -5,10 +5,15 @@ import java.sql.*;
 public class Query2 {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
 
+
         Class.forName("org.postgresql.Driver");
-        Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/techproed", "postgres", "Ss20112013Ss.");
+
+        Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/techproed",
+                "postgres",
+                "Ss20112013Ss.");
         Statement st = con.createStatement();
 
+<<<<<<< HEAD
         //Soru-1:Ögrenciler table daki Erkek öğrencileri listeleyiniz
 
         ResultSet result1=st.executeQuery("Select * from ogrenciler Where cinsiyet='E'");
@@ -29,9 +34,21 @@ public class Query2 {
 
 
 
+=======
+        ResultSet data = st.executeQuery("select * from ogrenciler where cinsiyet='E'");
+>>>>>>> ercan
 
+        //SORU: Öğrenciler tablosundaki Erkek möğrencileri listeleyiniz?
 
+        while (data.next()){
+            //System.out.println(data.getInt(1) + data.getString(2) +
+            //        data.getInt(3) + data.getString(4));
 
+            System.out.printf("%-6d %-15.15s %-8s %-8s\n", ((ResultSet) data).getInt(1), data.getString(2), data.getString(3), data.getString(4));
 
+        }
+        con.close();
+        st.close();
+        data.close();
     }
 }
