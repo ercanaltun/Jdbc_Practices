@@ -1,0 +1,68 @@
+CREATE TABLE customers_products
+( 
+  product_id int,
+  customer_name varchar(50),
+  product_name varchar(50)
+);
+INSERT INTO customers_products VALUES (10, 'Mark', 'Orange');
+INSERT INTO customers_products VALUES (10, 'Mark', 'Orange');
+INSERT INTO customers_products VALUES (20, 'John', 'Apple');
+INSERT INTO customers_products VALUES (30, 'Amy', 'Palm');
+INSERT INTO customers_products VALUES (20, 'Mark', 'Apple');
+INSERT INTO customers_products VALUES (10, 'Adem', 'Orange');
+INSERT INTO customers_products VALUES (40, 'John', 'Apricot');
+INSERT INTO customers_products VALUES (20, 'Eddie', 'Apple');
+
+CREATE TABLE customers_likes
+( 
+  product_id int,
+  customer_name varchar(50),
+  liked_product varchar(50)
+);
+INSERT INTO customers_likes VALUES (10, 'Mark', 'Orange');
+INSERT INTO customers_likes VALUES (50, 'Mark', 'Pineapple');
+INSERT INTO customers_likes VALUES (60, 'John', 'Avocado');
+INSERT INTO customers_likes VALUES (30, 'Lary', 'Cherries');
+INSERT INTO customers_likes VALUES (20, 'Mark', 'Apple');
+INSERT INTO customers_likes VALUES (10, 'Adem', 'Orange');
+INSERT INTO customers_likes VALUES (40, 'John', 'Apricot');
+INSERT INTO customers_likes VALUES (20, 'Eddie', 'Apple');
+Select * from customers_products;
+Select * from customers_likes;
+
+--* EXISTS komutu SUBQUERY'ler ile beraber kullanilir.
+--* IN komutu OR komutunun kisa yazilmis halidir. 
+--* IN komutunu tek basina SUBQUERY'lerle beraber kullanmayiz.
+--* SUBQUERY kullanacaksaniz EXISTS kullanmaniz gerekir.
+
+--Soru-1:Product_id'leri ayni olan musterilerin isimlerini gosteriniz.
+Select p.customer_name from customers_products p
+Where Exists
+(Select customer_name from customers_likes a
+Where  p.product_id=a.product_id);
+
+---------------------------------------------------------------------------------------------
+
+--Soru-2:Product_name ile liked_product'i ayni olan musterilerin isimlerini gosteren kod
+Select  p.customer_name from customers_products p
+Where Exists
+(Select customer_name from customers_likes a 
+Where  p.product_name=a.liked_product);
+
+---------------------------------------------------------------------------------------------
+--Soru-3:Kac farkli meyve var?
+Select count(product_name) from customers_products
+Where Exists
+(select liked_product from customers_likes
+Where product_name=liked_product);
+
+---------------------------------------------------------------------------------------------
+
+--Soru-4:Her iki tablodaki ortak id ve isimleri gosteren kodu yaziniz.
+Select p.customer_name,p.product_id from customers_products p
+Inner Join customers_likes a
+On p.customer_name=a.customer_name and p.product_id=a.product_id;
+
+
+
+
